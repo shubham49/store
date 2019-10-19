@@ -19,9 +19,9 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/' + AppRoutes.LIST,
-      icon: 'list'
+      title: 'Cart',
+      url: '/' + AppRoutes.CART,
+      icon: 'cart'
     }
   ];
 

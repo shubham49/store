@@ -10,5 +10,8 @@
             "buyBtnText": "Buy",
             "cartBtnText": "Add to cart"
         }
+    },
+    "details": {
+        "topText": "Enter Details"
     }
 }

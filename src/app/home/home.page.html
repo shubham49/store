@@ -10,7 +10,7 @@
       <p><span class="strike-text">Rs. {{p.mrp}}</span> Rs. {{p.discountedPrice}}</p>
       <div class="text-right">
         <ion-button (click)="buy(p)" color="tertiary">{{'home.product.buyBtnText' | translate}}</ion-button>
-        <ion-button (click)="addToCart(p)" [routerLink]="['cart']" color="tertiary">{{'home.product.cartBtnText' | translate}}</ion-button>
+        <ion-button (click)="addToCart(p)" color="tertiary">{{'home.product.cartBtnText' | translate}}</ion-button>
       </div>
     </ion-card-content>
   </ion-card>

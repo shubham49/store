@@ -1,4 +1,19 @@
-<app-header></app-header>
-<p>
-  details works!
-</p>
+<app-header headerText="details.topText"></app-header>
+
+<ion-content>
+  <form [formGroup]="detailsForm" (ngSubmit)="submitForm()">
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Contact</ion-label>
+      <ion-input type="number" formControlName="contact"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Address</ion-label>
+      <ion-textarea formControlName="address"></ion-textarea>
+    </ion-item>
+    <ion-button expand="block" type="submit" [disabled]="!detailsForm.valid">Submit</ion-button>
+  </form>
+</ion-content>

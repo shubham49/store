@@ -3,6 +3,7 @@ import { ProductService } from '../shared/services/product.service';
 import { Product } from '../shared/models/product';
 import { CartService } from '../shared/services/cart.service';
 import { NavController } from '@ionic/angular';
+import { AppRoutes } from '../shared/constants/routes';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +26,6 @@ export class HomePage {
 
   buy(product: Product) {
     this.addToCart(product);
-    this.navCtrl.navigateForward('/details');
+    this.navCtrl.navigateForward('/' + AppRoutes.DETAILS);
   }
 }
