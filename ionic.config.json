@@ -1,5 +1,7 @@
 {
   "name": "bhushanBartanStore",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

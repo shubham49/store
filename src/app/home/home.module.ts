@@ -5,12 +5,18 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { ProductService } from '../shared/services/product.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { HeaderComponent } from '../shared/components/header/header.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    TranslateModule,
     IonicModule,
+    SharedModule,
     RouterModule.forChild([
       {
         path: '',
@@ -18,6 +24,7 @@ import { HomePage } from './home.page';
       }
     ])
   ],
-  declarations: [HomePage]
+  declarations: [HomePage],
+  providers: [ProductService]
 })
 export class HomePageModule {}

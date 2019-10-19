@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AppRoutes } from './shared/constants/routes';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +15,12 @@ export class AppComponent {
   public appPages = [
     {
       title: 'Home',
-      url: '/home',
+      url: '/' + AppRoutes.HOME,
       icon: 'home'
     },
     {
       title: 'List',
-      url: '/list',
+      url: '/' + AppRoutes.LIST,
       icon: 'list'
     }
   ];
@@ -26,8 +28,13 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private translate: TranslateService
   ) {
+    this.translate.setDefaultLang('en');
+    this.translate.use('en');
+    this.translate.get('sidebar.text1').subscribe(data => this.appPages[0].title = data);
+    this.translate.get('sidebar.text2').subscribe(data => this.appPages[1].title = data);
     this.initializeApp();
   }
 

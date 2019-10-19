@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { ProductService } from '../shared/services/product.service';
+import { Product } from '../shared/models/product';
+import { CartService } from '../shared/services/cart.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +11,20 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  products: Product[];
 
+  constructor(private productService: ProductService,
+              private cartService: CartService,
+              private navCtrl: NavController) {
+    this.products = this.productService.getProducts();
+  }
+
+  addToCart(product: Product) {
+    this.cartService.shop(product);
+  }
+
+  buy(product: Product) {
+    this.addToCart(product);
+    this.navCtrl.navigateForward('/details');
+  }
 }

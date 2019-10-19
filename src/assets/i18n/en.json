@@ -1,0 +1,14 @@
+{
+    "sidebar": {
+        "headerText": "Menu",
+        "text1":"Home",
+        "text2":"List"
+    },
+    "home": {
+        "topText": "Shop at genuine price",
+        "product": {
+            "buyBtnText": "Buy",
+            "cartBtnText": "Add to cart"
+        }
+    }
+}
