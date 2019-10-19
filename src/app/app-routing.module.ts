@@ -13,8 +13,8 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
-    path: AppRoutes.LIST,
-    loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
+    path: AppRoutes.CART,
+    loadChildren: () => import('./cart/cart.module').then(m => m.CartModule)
   },
   {
     path: AppRoutes.DETAILS,

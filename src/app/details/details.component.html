@@ -3,17 +3,20 @@
 <ion-content>
   <form [formGroup]="detailsForm" (ngSubmit)="submitForm()">
     <ion-item>
-      <ion-label position="floating">Name</ion-label>
+      <ion-label position="floating">{{'details.name' | translate}}</ion-label>
       <ion-input type="text" formControlName="name"></ion-input>
+      <p *ngIf="!detailsForm.controls.name.valid && detailsForm.controls.name.dirty" class="error-text">Please fill the name.</p>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Contact</ion-label>
+      <ion-label position="floating">{{'details.contact' | translate}}</ion-label>
       <ion-input type="number" formControlName="contact"></ion-input>
+      <p *ngIf="!detailsForm.controls.contact.valid  && detailsForm.controls.contact.dirty" class="error-text">Please enter valid phone number.</p>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Address</ion-label>
+      <ion-label position="floating">{{'details.address' | translate}}</ion-label>
       <ion-textarea formControlName="address"></ion-textarea>
+      <p *ngIf="!detailsForm.controls.address.valid  && detailsForm.controls.address.dirty" class="error-text">Please enter the address.</p>
     </ion-item>
-    <ion-button expand="block" type="submit" [disabled]="!detailsForm.valid">Submit</ion-button>
+    <ion-button expand="block" type="submit" [disabled]="!detailsForm.valid">{{'details.submitBtnText' | translate}}</ion-button>
   </form>
 </ion-content>

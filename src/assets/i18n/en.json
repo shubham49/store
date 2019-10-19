@@ -12,6 +12,13 @@
         }
     },
     "details": {
-        "topText": "Enter Details"
+        "topText": "Enter Details",
+        "name": "Name",
+        "contact": "Mobile",
+        "address": "Address",
+        "submitBtnText": "Order Now"
+    },
+    "cart": {
+        "topText": "Shopping Cart"
     }
 }

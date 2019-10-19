@@ -1,0 +1,31 @@
+<app-header headerText="cart.topText"></app-header>
+
+<ion-content>
+  <div class="content">
+    <h4>Items added in cart</h4>
+    <div *ngFor="let p of products">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            {{p.name}} ({{p.quantity}} Pc.)
+          </ion-col>
+          <ion-col>
+            Rs. {{p.discountedPrice * p.quantity}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="2">
+          </ion-col>
+          <ion-col class="counter" size="4">
+            <ion-icon name="remove-circle" (click)="updateItem(p, -1)"></ion-icon>
+            <span class="text">{{p.quantity}}</span>
+            <ion-icon class="counter-right" name="add-circle" (click)="updateItem(p, 1)"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <p class="text-right">Total Price: {{totalPrice}}</p>
+    <ion-button expand="block" [routerLink]="['/details']">Continue</ion-button>
+  </div>
+
+</ion-content>
