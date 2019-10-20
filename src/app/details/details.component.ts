@@ -7,6 +7,8 @@ import {
 } from '@angular/forms';
 import { NavController, AlertController } from '@ionic/angular';
 import { CartService } from '../shared/services/cart.service';
+import { Product } from '../shared/models/product';
+import { EmailService } from '../shared/services/email.service';
 
 @Component({
   selector: 'app-details',
@@ -16,21 +18,16 @@ import { CartService } from '../shared/services/cart.service';
 export class DetailsComponent implements OnInit {
   detailsForm: FormGroup;
   totalPrice = 0;
+  orderDetails = '';
 
   constructor(
     private formBuilder: FormBuilder,
     private navCtrl: NavController,
     private cartService: CartService,
-    private alertCtrl: AlertController
+    private emailService: EmailService
   ) {
     this.cartService.getCart().subscribe(data => {
-      if (!data.length) {
-        this.navCtrl.navigateForward('/');
-      }
-      this.totalPrice = 0;
-      data.forEach(
-        p => (this.totalPrice += p.discountedPrice * p.quantity)
-      );
+      this.calculte(data);
     });
   }
 
@@ -38,36 +35,38 @@ export class DetailsComponent implements OnInit {
     this.detailsForm = this.formBuilder.group({
       name: new FormControl('', Validators.required),
       address: new FormControl('', Validators.required),
-      contact: new FormControl('', [Validators.required, Validators.pattern('[789][0-9]{9}')])
+      contact: new FormControl('', [
+        Validators.required,
+        Validators.pattern('[789][0-9]{9}')
+      ])
     });
   }
 
-  submitForm() {
-    console.log(this.detailsForm.valid);
+  async submitForm() {
+    const templateParams = {
+      name: this.detailsForm.get('name').value,
+      contact: this.detailsForm.get('contact').value,
+      address: this.detailsForm.get('address').value,
+      price: this.totalPrice,
+      message: this.orderDetails
+    };
+    const serviceId = 'default_service';
+    const templateId = 'order_store';
+    this.emailService.sendEmail({
+      serviceId,
+      templateId,
+      templateParams
+    });
   }
 
-  async presentAlertConfirm() {
-    const alert = await this.alertCtrl.create({
-      header: 'Confirm!',
-      message: 'Order will be placed! ',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: blah => {
-            console.log('Confirm Cancel: blah');
-          }
-        },
-        {
-          text: 'Okay',
-          handler: () => {
-            console.log('Confirm Okay');
-          }
-        }
-      ]
+  calculte(data: Product[]) {
+    if (!data.length) {
+      this.navCtrl.navigateForward('/');
+    }
+    this.totalPrice = 0;
+    data.forEach(p => {
+      this.totalPrice += p.discountedPrice * p.quantity;
+      this.orderDetails += p.name + ' (' + p.quantity + '),';
     });
-
-    await alert.present();
   }
 }
